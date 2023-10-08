@@ -75,7 +75,7 @@ export default {
         setTimeout(() => {
             (document.getElementsByClassName('Modal-module_modalOverlay__cdZDa')[0] as HTMLElement).click()
             setTimeout(() => {
-                document.getElementById('top') ? document.getElementById('top').remove() : 0;
+                document.getElementById('ad-top') ? document.getElementById('ad-top').remove() : 0;
                 document.getElementById('help-button').click() // Bypass stats interfering with welcome
                 document.getElementById('help-button').remove()
             },250)
