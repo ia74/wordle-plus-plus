@@ -6,8 +6,8 @@ export default function(error: string) {
     // x-0tu
     
     let errorType = WPPErrorDictionary[error.split('-')[0]]
-    let errorID = WPPErrorDictionary[error.split('-')[1].split('')[0]]
+    let errorDEF = WPPErrorDictionary['WP' + error]
     let errorSpec = WPPErrorDictionary[error.split('-')[1].split('')[1]]
     let errorUF = WPPErrorDictionary[error.split('-')[1].split('')[2]]
-    console.log(errorType,errorID,errorSpec,errorUF)
+    return {type:errorType,def:errorDEF,spec:errorSpec,uf:errorUF}
 }

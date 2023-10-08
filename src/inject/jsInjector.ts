@@ -5,7 +5,7 @@ import { WPPGlobal } from "../WPPGlobal";
 export default (jsJSON, wpt = null) => {
     
     if(!jsJSON.js) {
-        new logger.Logger(logger.LogLevels.error).log('ERR WPF-8MY');
+        new logger.Logger(logger.LogLevels.error).errlog('WPF-8MY', '');
         return;
     }
     let fullJS = jsJSON.js
@@ -26,6 +26,6 @@ export default (jsJSON, wpt = null) => {
         document.body.appendChild(newJS)
         new logger.Logger(logger.LogLevels.success).log('JS injected!')
     } catch (er) {
-        new logger.Logger(logger.LogLevels.error).log('ERR WPF-4MY: '+er)
+        new logger.Logger(logger.LogLevels.error).errlog('WPF-4MY', er)
     }
 }

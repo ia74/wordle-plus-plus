@@ -2,7 +2,7 @@ import logger from "../mods/logger";
 
 export default (cssJSON) => {
     if(!cssJSON.css) {
-        new logger.Logger(logger.LogLevels.error).log('ERR WPF-9MY');
+        new logger.Logger(logger.LogLevels.error).errlog('WPF-9MY', '');
         return;
     }
     let fullCSS = cssJSON.css
@@ -13,6 +13,6 @@ export default (cssJSON) => {
         document.body.appendChild(newStyle)
         new logger.Logger(logger.LogLevels.success).log('CSS injected successfully!')
     } catch (er) {
-        new logger.Logger(logger.LogLevels.error).log('ERR WPF-3mY: ' + er)
+        new logger.Logger(logger.LogLevels.error).errlog('WPF-3mY', er)
     }
 }

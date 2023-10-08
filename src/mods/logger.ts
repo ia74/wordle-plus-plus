@@ -1,4 +1,6 @@
 import { WPPGlobal } from "../WPPGlobal";
+import { ParsedError } from "../errors/ParsedError";
+import ErrorParser from "../errors/ErrorParser";
 
 enum LogLevels {
     log = 'Log',
@@ -17,6 +19,10 @@ class Logger {
     public log(message: string) {
         if (typeof WPPGlobal.IsSilent === "number") return;
         console.log(`[${this.module} ${this.level}] ` + message)
+    }
+    public errlog(wpferror: string, error: any) {
+        let errorParsed: ParsedError = ErrorParser(wpferror);
+        console.log('ERR ' + wpferror + " | " + errorParsed + ' | ' + error);
     }
 }
 export default { Logger, LogLevels }
