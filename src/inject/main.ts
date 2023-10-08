@@ -1,12 +1,14 @@
 import logger from "../mods/logger";
 import { getFElement } from "../mods/ModGlobal";
 import removeAbsentLetters from "../mods/removeAbsentLetters";
+import removeSubscribeLink from "../mods/removeSubscribeLink";
 import removeStatsShare from "../mods/removeStatsShare";
 import trackerRemoval from "../mods/trackerRemoval";
 import { WPPGlobal } from "../WPPGlobal";
 import cssInjector from "./cssInjector";
 import jsInjector from "./jsInjector";
 import welcome from "./welcome";
+import removeWelcomeScreen from "../mods/removeWelcomeScreen";
 
 export default {
     css: cssInjector,
@@ -22,6 +24,7 @@ export default {
 
         new logger.Logger(logger.LogLevels.init).log('Removing ads, trackers & pre-inject initialization.')
         trackerRemoval();
+        removeWelcomeScreen();
         document.title = 'Wordle - Modded w/ W++'
         document.getElementById('settings-button').onclick = () => {
             setTimeout(() => {
@@ -77,6 +80,18 @@ export default {
                 document.getElementById('help-button').remove()
             },250)
         },1000)
+
+        /**
+         * NON-INIT MODS
+         * Search tags: NIM N-IM NONINIT MODS MODINIT
+         */
+        const mods: Array<() => void> = [
+            removeSubscribeLink,
+        ];
+
+        mods.forEach(mod => {
+            mod();
+        })
     }
 }
 
