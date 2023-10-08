@@ -9,6 +9,7 @@ import cssInjector from "./cssInjector";
 import jsInjector from "./jsInjector";
 import welcome from "./welcome";
 import removeWelcomeScreen from "../mods/removeWelcomeScreen";
+import autoAnswerButton from "../mods/autoAnswerButton";
 
 export default {
     css: cssInjector,
@@ -25,6 +26,7 @@ export default {
         new logger.Logger(logger.LogLevels.init).log('Removing ads, trackers & pre-inject initialization.')
         trackerRemoval();
         removeWelcomeScreen();
+        document.getElementById('ad-top') ? document.getElementById('ad-top').remove() : 0;
         document.title = 'Wordle - Modded w/ W++'
         document.getElementById('settings-button').onclick = () => {
             setTimeout(() => {
@@ -87,6 +89,7 @@ export default {
          */
         const mods: Array<() => void> = [
             removeSubscribeLink,
+            autoAnswerButton
         ];
 
         mods.forEach(mod => {
