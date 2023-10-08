@@ -7,6 +7,8 @@ export enum WPPErrorDictionary {
     "WPF-5fN" = "W++ failed to inject. Try reinjecting.",
     "WPA-6mN" = "W++ found W++ CSS already. Attempting to override.",
     "WPA-7mN" = "W++ found W++ JS already. Attempting to override.",
+    "WPF-8MY" = "W++ failed to find JS in your theme.",
+    "WPF-9MY" = "W++ failed to find CSS in your theme.",
     // Err Types
     "T" = "Title Error",
     "F" = "Failure",

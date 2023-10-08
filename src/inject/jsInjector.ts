@@ -4,6 +4,10 @@ import { WPPGlobal } from "../WPPGlobal";
 
 export default (jsJSON, wpt = null) => {
     
+    if(!jsJSON.js) {
+        new logger.Logger(logger.LogLevels.error).log('ERR WPF-8MY');
+        return;
+    }
     let fullJS = jsJSON.js
     fullJS = fullJS.replace(/w_header/g, 'document.getElementsByClassName(\''+WPPGlobal.Header+'\')[0]')
     fullJS = fullJS.replace(/w_bkb/g, 'document.getElementsByClassName(\''+WPPGlobal.BelowKeyboard+'\')[0]')

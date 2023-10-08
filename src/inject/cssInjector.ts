@@ -1,6 +1,10 @@
 import logger from "../mods/logger";
 
 export default (cssJSON) => {
+    if(!cssJSON.css) {
+        new logger.Logger(logger.LogLevels.error).log('ERR WPF-9MY');
+        return;
+    }
     let fullCSS = cssJSON.css
     let newStyle = document.createElement('style')
     newStyle.innerHTML = `/* ${cssJSON.name} by ${cssJSON.author} */\n` + fullCSS;
