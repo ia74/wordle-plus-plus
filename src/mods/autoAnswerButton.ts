@@ -2,33 +2,30 @@ import { ModGlobal } from "./ModGlobal";
 
 export default function () {
 	let answer: string[];
-	fetch("https://www.nytimes.com/svc/wordle/v2/2023-10-08.json")
+	let fmd: string = new Date().getFullYear() + '-' + ("0" + (new Date().getMonth() + 1)).slice(-2) + '-' + ("0" + new Date().getDate()).slice(-2);
+	fetch("https://www.nytimes.com/svc/wordle/v2/" + fmd + ".json")
 	.then(r=>r.json())
 	.then(r=>{
 		answer = r.solution.split('');
-	})
-
-	const btn: HTMLButtonElement = document.createElement('button');
-	btn.className = ModGlobal.Key + ' dont-read';
-	btn.type = 'button';
-	btn.addEventListener('click', (ev: MouseEvent) => {
-		document.querySelectorAll(ModGlobal.Key).forEach(keya => {
-			let keyb: HTMLButtonElement = keya as HTMLButtonElement;
-			if (keyb.className.includes('dont-read')) return;
-			answer.forEach(letter => {
-				console.log(letter, keyb.getAttribute('data-key'))
-				if (keyb.getAttribute('data-key') == letter) {
-					var keyboardEvent: KeyboardEvent = new KeyboardEvent('keypress', {
-						key: keyb.getAttribute('data-key')
-					})
-					console.log(keyb.getAttribute('data-key'))
-					
-					document.querySelector('.MomentSystem-module_moment__G9hyw').dispatchEvent(keyboardEvent);
-					
+		answer.push('↵');
+		console.log('GOT NASEWR')
+		const btn: HTMLButtonElement = document.createElement('button');
+		btn.className = ModGlobal.Key + ' dont-read';
+		btn.type = 'button';
+		let buttons = {}
+		btn.addEventListener('click', (ev: MouseEvent) => {
+			document.querySelectorAll('.Key-module_key__kchQI').forEach(a=> {
+				if(answer.includes(a.getAttribute('data-key'))) { // @ts-ignore
+					buttons[a.getAttribute('data-key')] = a;
 				}
 			})
-		})
-	});
-	btn.innerText = "SOLVE";
-	document.querySelector('main').appendChild(btn);
+			answer.forEach(letter => {
+				if(buttons[letter]) buttons[letter].click();
+			})
+			buttons = {};
+			
+		});
+		btn.innerText = "SOLVE";
+		document.querySelector('main').appendChild(btn);
+	})
 }

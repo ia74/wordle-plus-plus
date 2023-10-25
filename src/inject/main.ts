@@ -1,5 +1,5 @@
 import logger from "../mods/logger";
-import { getFElement } from "../mods/ModGlobal";
+import {getFElement, getIElement, ModGlobal} from "../mods/ModGlobal";
 import removeAbsentLetters from "../mods/removeAbsentLetters";
 import removeSubscribeLink from "../mods/removeSubscribeLink";
 import removeStatsShare from "../mods/removeStatsShare";
@@ -19,13 +19,15 @@ export default {
             throw new Error("W++ has been injected already. Cannot continue. ERR WPI-2fY");
         }
 
-        if(document.getElementsByClassName('Welcome-module_title__uhLqe')[1]) {
-            (document.getElementsByClassName('Welcome-module_button__ZG0Zh')[0] as HTMLElement).click();
+        if (!getFElement(ModGlobal.GameCheck)) {
+            alert('W++: You\'re not even on Wordle!');
+            throw new Error("We're not even on Wordle!!");
         }
+
+        removeWelcomeScreen();
 
         new logger.Logger(logger.LogLevels.init).log('Removing ads, trackers & pre-inject initialization.')
         trackerRemoval();
-        removeWelcomeScreen();
         document.getElementById('ad-top') ? document.getElementById('ad-top').remove() : 0;
         document.title = 'Wordle - Modded w/ W++'
         document.getElementById('settings-button').onclick = () => {
@@ -33,7 +35,7 @@ export default {
                 getFElement('Modal-module_heading__u2uxI').innerHTML = 'w++ & wordle settings'
                 let g = document.createElement('h1')
                 g.className = 'Modal-module_heading__u2uxI'
-                g.innerText = 'using w++ v'+WPPGlobal.Version
+                g.innerText = 'powered by w++ v'+WPPGlobal.Version
                 let g1 = document.createElement('h1')
                 g1.className = 'Modal-module_heading__u2uxI'
                 g1.innerText = `${js.name} by ${js.author}`
@@ -59,8 +61,8 @@ export default {
                 removeStatsShare();
             }, 20);
         }
-        document.getElementById('settings-button').click()
-        document.getElementById('AppHeader-module_navButton__nKv2h').remove()
+        getIElement(ModGlobal.SettingsButton).click()
+        getIElement(ModGlobal.NYTBar).remove()
 
         if (!getFElement('Settings-module_footnote__TOUR0')) {
             throw new Error('Auto-inject failed! Open the settings menu, then re-inject.')
@@ -73,15 +75,16 @@ export default {
 
         cssInjector(css)
         jsInjector(js, wpt)
+
         document.getElementById('help-button').click()
         setTimeout(() => {
             (document.getElementsByClassName('Modal-module_modalOverlay__cdZDa')[0] as HTMLElement).click()
             setTimeout(() => {
-                document.getElementById('ad-top') ? document.getElementById('ad-top').remove() : 0;
+                getIElement(ModGlobal.Ads).remove();
                 document.getElementById('help-button').click() // Bypass stats interfering with welcome
                 document.getElementById('help-button').remove()
             },250)
-        },1000)
+        },200)
 
         /**
          * NON-INIT MODS

@@ -60,9 +60,6 @@ export default {
         g2.innerText = "Hello!"
         g2.onhover = () => {this.remove();}
         w_bkb.appendChild(g2)
-   console.log('RAL Challenge!')
-   setInterval(() => {
-    doUseRAL();
-},250)
+    console.log('HI');
     `
 }

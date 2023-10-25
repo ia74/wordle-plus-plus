@@ -1,6 +1,6 @@
 {
   "name": "wordle-plus-plus",
-  "version": "1.3.0",
+  "version": "1.4.0-dev",
   "description": "Extensible modding for Wordle.",
   "main": "src/index.ts",
   "scripts": {
