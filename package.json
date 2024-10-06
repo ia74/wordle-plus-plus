@@ -1,6 +1,6 @@
 {
   "name": "wordle-plus-plus",
-  "version": "1.4.0-dev",
+  "version": "1.5.0-dev",
   "description": "Extensible modding for Wordle.",
   "main": "src/index.ts",
   "scripts": {
@@ -14,15 +14,15 @@
   "author": "Roizor",
   "license": "ISC",
   "devDependencies": {
-    "@webpack-cli/generators": "^3.0.1",
-    "eslint": "^8.36.0",
-    "prettier": "^2.8.4",
-    "webpack": "^5.76.1",
-    "webpack-cli": "^5.0.1"
+    "@webpack-cli/generators": "^3.0.7",
+    "eslint": "^8.57.1",
+    "prettier": "^2.8.8",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "terser": "^5.16.6",
-    "ts-loader": "^9.4.2",
-    "typescript": "^5.2.2"
+    "terser": "^5.34.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2"
   }
 }

@@ -28,41 +28,9 @@ export default {
 
         new logger.Logger(logger.LogLevels.init).log('Removing ads, trackers & pre-inject initialization.')
         trackerRemoval();
-        document.getElementById('ad-top') ? document.getElementById('ad-top').remove() : 0;
-        document.title = 'Wordle - Modded w/ W++'
-        document.getElementById('settings-button').onclick = () => {
-            setTimeout(() => {
-                getFElement('Modal-module_heading__u2uxI').innerHTML = 'w++ & wordle settings'
-                let g = document.createElement('h1')
-                g.className = 'Modal-module_heading__u2uxI'
-                g.innerText = 'powered by w++ v'+WPPGlobal.Version
-                let g1 = document.createElement('h1')
-                g1.className = 'Modal-module_heading__u2uxI'
-                g1.innerText = `${js.name} by ${js.author}`
-                getFElement('Modal-module_content__TrPIX').appendChild(g)
-                getFElement('Modal-module_content__TrPIX').appendChild(g1)
-            }, 20)
-        }
-        document.getElementById('help-button').onclick = () => {
-            setTimeout(() => {
-                getFElement('Modal-module_heading__u2uxI').innerHTML = 'Welcome to W++!'
-                getFElement('Help-module_subheading__mbRG9').innerHTML = welcome
-                getFElement('Help-module_examples__W3VXL').remove()
-                getFElement('Help-module_statsLogin__HkQec').remove()
-                getFElement('Help-module_instructions__uXsG6').remove()
-                getFElement('Help-module_reminderSignUp__oQ42D').remove()
-                setTimeout(() => {
-                    document.getElementById('_sd_cdi').remove();
-                },5000)
-            }, 20)
-        }
-        document.getElementById('statistics-button').onclick = () => {
-            setTimeout(() => {
-                removeStatsShare();
-            }, 20);
-        }
-        getIElement(ModGlobal.SettingsButton).click()
-        getIElement(ModGlobal.NYTBar).remove()
+        getIElement(ModGlobal.Ads) != null ? getIElement(ModGlobal.Ads).remove() : 0;
+        document.title = 'Wordle - Modded w/ W++';
+        // getIElement(ModGlobal.NYTBar).remove()
 
         if (!getFElement('Settings-module_footnote__TOUR0')) {
             throw new Error('Auto-inject failed! Open the settings menu, then re-inject.')
@@ -73,17 +41,51 @@ export default {
         window['_sentryConfig']['wppg'] = WPPGlobal;
         window['_sentryConfig']['ralf'] = removeAbsentLetters;
 
-        cssInjector(css)
-        jsInjector(js, wpt)
+        cssInjector(css);
+        jsInjector(js, wpt);
 
-        document.getElementById('help-button').click()
+        (getIElement(ModGlobal.SettingsButton) as HTMLButtonElement).click()
         setTimeout(() => {
             (document.getElementsByClassName('Modal-module_modalOverlay__cdZDa')[0] as HTMLElement).click()
             setTimeout(() => {
                 getIElement(ModGlobal.Ads).remove();
-                document.getElementById('help-button').click() // Bypass stats interfering with welcome
-                document.getElementById('help-button').remove()
-            },250)
+                (getIElement(ModGlobal.HelpButton) as HTMLButtonElement).click(); // Bypass stats interfering with welcome
+                (getIElement(ModGlobal.HelpButton) as HTMLButtonElement).remove();
+            },250);
+            
+            (getIElement(ModGlobal.SettingsButton) as HTMLButtonElement).onclick = () => {
+                setTimeout(() => {
+                    getFElement('Modal-module_heading__u2uxI').innerHTML = 'w++ & wordle settings'
+                    let g = document.createElement('h1')
+                    g.className = 'Modal-module_heading__u2uxI'
+                    g.innerText = 'powered by w++ v'+WPPGlobal.Version
+                    let g1 = document.createElement('h1')
+                    g1.className = 'Modal-module_heading__u2uxI'
+                    g1.innerText = `${js.name} by ${js.author}`
+                    getFElement('Modal-module_content__TrPIX').appendChild(g)
+                    getFElement('Modal-module_content__TrPIX').appendChild(g1)
+                }, 20)
+            }
+            (getIElement(ModGlobal.HelpButton) as HTMLButtonElement).onclick = () => {
+                setTimeout(() => {
+                    getFElement('Modal-module_heading__u2uxI').innerHTML = 'Welcome to W++!'
+                    getFElement('Help-module_subheading__mbRG9').innerHTML = welcome
+                    getFElement('Help-module_examples__W3VXL').remove()
+                    getFElement('Help-module_statsLogin__HkQec').remove()
+                    getFElement('Help-module_instructions__uXsG6').remove()
+                    getFElement('Help-module_reminderSignUp__oQ42D').remove()
+                    setTimeout(() => {
+                        document.getElementById('_sd_cdi').remove();
+                    },5000)
+                }, 20)
+            }
+            (getIElement(ModGlobal.StatisticsButton) as HTMLButtonElement).onclick = () => {
+                setTimeout(() => {
+                    removeStatsShare();
+                }, 20);
+            }
+            (getIElement(ModGlobal.SettingsButton) as HTMLButtonElement).click()
+            
         },200)
 
         /**

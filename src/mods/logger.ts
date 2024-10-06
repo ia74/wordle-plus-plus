@@ -22,7 +22,8 @@ class Logger {
     }
     public errlog(wpferror: string, error: any) {
         let errorParsed: ParsedError = ErrorParser(wpferror);
-        console.log('ERR ' + wpferror + " | " + errorParsed + ' | ' + error);
+        console.log(error)
+        console.log('ERR ' + wpferror + " | " + errorParsed + ' | ', error);
     }
 }
 export default { Logger, LogLevels }

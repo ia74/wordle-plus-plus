@@ -2,21 +2,23 @@ export enum ModGlobal {
     Key = 'Key-module_key__kchQI',
     AMZTracker = 'apstag',
     GTracker = 'googletag',
-    StatsContainer = 'Stats-module_ctaContainer__1Krdy',
+    StatsContainer = 'BotLink-module_botLink__uRdNy',
     BotLink = 'Stats-module_botLink__Gf9gC',
     SubLink = 'AppHeader-module_subscribeLink__VBUGi',
     WelcomeScreen = 'Welcome-module_contentWelcome__TL17B',
-    PlayButton = 'Welcome-module_button__ZG0Zh',
+    PlayButton = 'Welcome-module_button__ZG0Zh[data-testid="Play"]',
     GameCheck = 'MomentSystem-module_moment__G9hyw',
 
-    NYTBar = 'AppHeader-module_navButton__nKv2h',
+    NYTBar = 'AppHeader-module_toolbar__menu__MIxIr',
 
     SettingsButton = 'settings-button',
+    StatisticsButton = 'stats-button',
+    HelpButton = 'help-button',
     Ads = 'ad-top'
 }
 
 export function getFElement(cn: string) {
-    return document.getElementsByClassName(cn)[0];
+    return document.querySelector("." + cn);
 }
 
 export function getAElements(cn: string) {
@@ -24,5 +26,6 @@ export function getAElements(cn: string) {
 }
 
 export function getIElement(cn: string) {
-    return document.getElementById(cn);
+    console.log(document.querySelector("#"+cn), cn);
+    return document.querySelector("#"+cn);
 }
